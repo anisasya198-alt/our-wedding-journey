@@ -257,11 +257,8 @@ function Invitation() {
       </Section>
 
       {/* SECTION 4 */}
-      <motion.section
-        {...rise}
-        className="min-h-screen w-full bg-cover bg-center bg-no-repeat"
-        style={{ backgroundImage: `url(${bg4})` }}
-      />
+      <motion.img {...rise} src={bg4} alt="" className="block h-auto w-full select-none" draggable={false} />
+
 
       {/* SECTION 5 — gallery */}
       <Section bg={bg5} contentClassName="flex flex-col items-center justify-center gap-8 py-20">
