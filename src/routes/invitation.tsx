@@ -183,7 +183,7 @@ function Invitation() {
       </button>
 
       {/* SECTION 1 */}
-      <Section bg={bg1} className="flex min-h-screen flex-col items-center justify-center py-20">
+      <Section bg={bg1} contentClassName="flex flex-col items-center justify-center py-20">
         <motion.img
           src="https://cdn.gpteng.co/blank-app-v1.svg"
           alt="You're invited"
@@ -201,7 +201,7 @@ function Invitation() {
       </Section>
 
       {/* SECTION 2 */}
-      <Section bg={bg2} className="flex min-h-screen flex-col items-center justify-center gap-10 py-24">
+      <Section bg={bg2} contentClassName="flex flex-col items-center justify-center gap-10 py-24">
         <motion.div {...rise} className="text-center">
           <h2 className="font-serif text-4xl text-neutral-800 sm:text-5xl">The Bride &amp; Groom</h2>
           <p className="mt-3 text-lg italic text-neutral-700">Adventure Ultimate</p>
@@ -247,7 +247,7 @@ function Invitation() {
       </Section>
 
       {/* SECTION 3 */}
-      <Section bg={bg3} className="flex min-h-screen flex-col items-center justify-start gap-10 py-20">
+      <Section bg={bg3} contentClassName="flex flex-col items-center justify-start gap-10 py-20">
         <motion.div {...rise} className="w-full px-6">
           <Countdown />
         </motion.div>
@@ -264,7 +264,7 @@ function Invitation() {
       />
 
       {/* SECTION 5 — gallery */}
-      <Section bg={bg5} className="flex min-h-screen flex-col items-center justify-center gap-8 py-20">
+      <Section bg={bg5} contentClassName="flex flex-col items-center justify-center gap-8 py-20">
         <motion.h2 {...rise} className="font-serif text-3xl text-neutral-800 sm:text-4xl">
           Wedding Gallery
         </motion.h2>
@@ -279,7 +279,7 @@ function Invitation() {
       />
 
       {/* SECTION 7 — RSVP Canva */}
-      <Section bg={bg7} className="flex min-h-screen flex-col items-center justify-center gap-6 py-20">
+      <Section bg={bg7} contentClassName="flex flex-col items-center justify-center gap-6 py-20">
         <motion.h2 {...rise} className="font-serif text-3xl text-neutral-800 sm:text-4xl">
           RSVP
         </motion.h2>
@@ -315,7 +315,7 @@ function Invitation() {
       </Section>
 
       {/* SECTION 8 */}
-      <Section bg={bg8} className="flex min-h-screen flex-col items-center justify-start py-20">
+      <Section bg={bg8} contentClassName="flex flex-col items-center justify-start py-20">
         <motion.div {...rise} className="w-full max-w-2xl px-6">
           <div className="max-h-[70vh] overflow-y-auto rounded-xl bg-white/40 p-4 backdrop-blur">
             <img src={isi8} alt="Section 8" className="w-full" />
