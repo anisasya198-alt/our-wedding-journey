@@ -41,30 +41,31 @@ const rise = {
 function Section({
   bg,
   children,
-  className = "",
+  contentClassName = "",
 }: {
   bg: string;
   children?: React.ReactNode;
-  className?: string;
+  contentClassName?: string;
 }) {
   return (
-    <section
-      className={`relative w-full bg-cover bg-center bg-no-repeat ${className}`}
-      style={{ backgroundImage: `url(${bg})` }}
-    >
-      {children}
+    <section className="relative w-full">
+      <img src={bg} alt="" className="block h-auto w-full select-none" draggable={false} />
+      {children && (
+        <div className={`absolute inset-0 flex w-full ${contentClassName}`}>{children}</div>
+      )}
     </section>
   );
 }
 
 function Countdown() {
-  const target = new Date("2027-01-01T10:00:00").getTime();
-  const [now, setNow] = useState(Date.now());
+  const target = new Date("2026-07-26T10:00:00").getTime();
+  const [now, setNow] = useState<number | null>(null);
   useEffect(() => {
+    setNow(Date.now());
     const id = setInterval(() => setNow(Date.now()), 1000);
     return () => clearInterval(id);
   }, []);
-  const diff = Math.max(0, target - now);
+  const diff = now === null ? 0 : Math.max(0, target - now);
   const d = Math.floor(diff / 86400000);
   const h = Math.floor((diff / 3600000) % 24);
   const m = Math.floor((diff / 60000) % 60);
@@ -82,7 +83,9 @@ function Countdown() {
           key={i.l}
           className="flex h-20 w-16 flex-col items-center justify-center rounded-xl bg-white/70 text-neutral-800 shadow-lg backdrop-blur sm:h-24 sm:w-20"
         >
-          <span className="text-2xl font-semibold sm:text-3xl">{String(i.v).padStart(2, "0")}</span>
+          <span className="text-2xl font-semibold sm:text-3xl" suppressHydrationWarning>
+            {now === null ? "--" : String(i.v).padStart(2, "0")}
+          </span>
           <span className="text-[10px] uppercase tracking-widest">{i.l}</span>
         </div>
       ))}
