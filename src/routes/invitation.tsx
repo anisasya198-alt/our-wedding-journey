@@ -269,11 +269,8 @@ function Invitation() {
       </Section>
 
       {/* SECTION 6 */}
-      <motion.section
-        {...rise}
-        className="min-h-screen w-full bg-cover bg-center bg-no-repeat"
-        style={{ backgroundImage: `url(${bg6})` }}
-      />
+      <motion.img {...rise} src={bg6} alt="" className="block h-auto w-full select-none" draggable={false} />
+
 
       {/* SECTION 7 — RSVP Canva */}
       <Section bg={bg7} contentClassName="flex flex-col items-center justify-center gap-6 py-20">
