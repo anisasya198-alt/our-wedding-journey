@@ -49,10 +49,20 @@ function Section({
 }) {
   return (
     <section className="relative w-full">
-      <img src={bg} alt="" className="block h-auto w-full select-none" draggable={false} />
-      {children && (
-        <div className={`absolute inset-0 flex w-full ${contentClassName}`}>{children}</div>
-      )}
+      <div
+        className="w-full bg-cover bg-center bg-no-repeat"
+        style={{
+          backgroundImage: `url(${bg})`,
+          backgroundSize: "cover",
+          backgroundPosition: "center",
+          minHeight: "auto",
+        }}
+      >
+        <img src={bg} alt="" className="block h-auto w-full select-none" draggable={false} />
+        {children && (
+          <div className={`absolute inset-0 flex w-full ${contentClassName}`}>{children}</div>
+        )}
+      </div>
     </section>
   );
 }
@@ -77,7 +87,7 @@ function Countdown() {
     { v: s, l: "Detik" },
   ];
   return (
-    <div className="flex justify-center gap-2 px-2 sm:gap-5">
+    <div className="flex justify-center gap-2 sm:gap-4">
       {items.map((i) => (
         <motion.div
           key={i.l}
@@ -85,12 +95,12 @@ function Countdown() {
           whileInView={{ opacity: 1, scale: 1 }}
           viewport={{ once: true }}
           transition={{ duration: 0.6 }}
-          className="flex h-16 w-14 flex-col items-center justify-center rounded-lg bg-white/70 text-neutral-800 shadow-lg backdrop-blur sm:h-24 sm:w-20 sm:rounded-xl"
+          className="flex h-14 w-12 flex-col items-center justify-center rounded-lg bg-white/70 text-neutral-800 shadow-lg backdrop-blur sm:h-20 sm:w-16 sm:rounded-xl"
         >
-          <span className="text-xl font-semibold sm:text-3xl" suppressHydrationWarning>
+          <span className="text-lg font-semibold sm:text-2xl" suppressHydrationWarning>
             {now === null ? "--" : String(i.v).padStart(2, "0")}
           </span>
-          <span className="text-[9px] uppercase tracking-widest sm:text-[10px]">{i.l}</span>
+          <span className="text-[8px] uppercase tracking-widest sm:text-[9px]">{i.l}</span>
         </motion.div>
       ))}
     </div>
@@ -110,7 +120,7 @@ function Gallery() {
   const [active, setActive] = useState<string | null>(null);
   return (
     <>
-      <div className="mx-auto grid max-w-4xl grid-cols-2 gap-2 px-4 sm:gap-4 sm:px-6 md:grid-cols-3">
+      <div className="mx-auto grid max-w-4xl grid-cols-2 gap-2 px-3 sm:gap-3 sm:px-4 md:grid-cols-3">
         {photos.map((src, i) => (
           <motion.button
             key={src}
@@ -207,7 +217,7 @@ function Invitation() {
   };
 
   return (
-    <div className="relative w-full overflow-x-hidden">
+    <div className="relative w-full overflow-x-hidden bg-white">
       <audio ref={audioRef} src={MUSIC_URL} loop preload="auto" />
       <motion.button
         onClick={toggle}
@@ -221,20 +231,20 @@ function Invitation() {
       </motion.button>
 
       {/* SECTION 1 */}
-      <Section bg={bg1} contentClassName="flex flex-col items-center justify-center py-16 sm:py-20">
+      <Section bg={bg1} contentClassName="flex flex-col items-center justify-center py-10 sm:py-16 md:py-24">
         <motion.img
           src="https://cdn.gpteng.co/blank-app-v1.svg"
           alt="You're invited"
           {...rise}
-          className="h-12 w-auto opacity-0 sm:h-16"
+          className="h-10 w-auto opacity-0 sm:h-12 md:h-16"
         />
-        <motion.div {...rise} className="mt-6 w-full max-w-md px-4 sm:mt-8 sm:px-6">
+        <motion.div {...rise} className="mt-4 w-full max-w-xs px-3 sm:mt-6 sm:max-w-md sm:px-4 md:mt-8 md:px-6">
           <img src={isi1} alt="Section 1" className="w-full" />
         </motion.div>
         {to && (
           <motion.p
             {...rise}
-            className="mt-4 text-center text-xs tracking-widest text-neutral-700 sm:mt-6 sm:text-sm"
+            className="mt-3 text-center text-xs tracking-widest text-neutral-700 sm:mt-4 sm:text-sm md:mt-6"
           >
             Kepada Yth. <span className="block font-semibold">{to}</span>
           </motion.p>
@@ -242,18 +252,18 @@ function Invitation() {
       </Section>
 
       {/* SECTION 2 */}
-      <Section bg={bg2} contentClassName="flex flex-col items-center justify-center gap-6 py-16 sm:gap-10 sm:py-24">
-        <motion.div {...rise} className="text-center px-4 sm:px-0">
-          <h2 className="font-serif text-2xl text-neutral-800 sm:text-4xl md:text-5xl">The Bride &amp; Groom</h2>
-          <p className="mt-2 text-base italic text-neutral-700 sm:mt-3 sm:text-lg">Adventure Ultimate</p>
+      <Section bg={bg2} contentClassName="flex flex-col items-center justify-center gap-4 py-10 sm:gap-8 sm:py-16 md:gap-10 md:py-24">
+        <motion.div {...rise} className="text-center px-3 sm:px-4 md:px-0">
+          <h2 className="font-serif text-xl text-neutral-800 sm:text-2xl md:text-4xl lg:text-5xl">The Bride &amp; Groom</h2>
+          <p className="mt-1 text-sm italic text-neutral-700 sm:mt-2 sm:text-base md:text-lg">Adventure Ultimate</p>
         </motion.div>
 
-        <div className="flex w-full max-w-2xl flex-col items-center gap-6 px-4 sm:gap-8 sm:px-6">
+        <div className="flex w-full max-w-2xl flex-col items-center gap-4 px-3 sm:gap-6 sm:px-4 md:gap-8 md:px-6">
           <motion.div
-            initial={{ opacity: 0, x: -120 }}
+            initial={{ opacity: 0, x: -100 }}
             whileInView={{ opacity: 1, x: 0 }}
             viewport={{ once: true, amount: 0.3 }}
-            transition={{ duration: 1, ease: "easeOut" }}
+            transition={{ duration: 0.9, ease: "easeOut" }}
             className="flex w-full flex-col items-center"
           >
             <img src={isi2Atas} alt="Bride" className="w-full" />
@@ -261,17 +271,17 @@ function Invitation() {
               href="https://instagram.com/"
               target="_blank"
               rel="noreferrer"
-              className="mt-2 inline-flex items-center gap-2 text-xs text-neutral-700 hover:text-neutral-900 sm:mt-3 sm:text-sm"
+              className="mt-1 inline-flex items-center gap-1 text-xs text-neutral-700 hover:text-neutral-900 sm:mt-2 sm:gap-2 sm:text-sm"
             >
-              <Instagram size={16} /> @bride_ig
+              <Instagram size={14} className="sm:w-4 sm:h-4" /> @bride_ig
             </a>
           </motion.div>
 
           <motion.div
-            initial={{ opacity: 0, x: 120 }}
+            initial={{ opacity: 0, x: 100 }}
             whileInView={{ opacity: 1, x: 0 }}
             viewport={{ once: true, amount: 0.3 }}
-            transition={{ duration: 1, ease: "easeOut", delay: 0.15 }}
+            transition={{ duration: 0.9, ease: "easeOut", delay: 0.15 }}
             className="flex w-full flex-col items-center"
           >
             <img src={isi2Bawah} alt="Groom" className="w-full" />
@@ -279,20 +289,20 @@ function Invitation() {
               href="https://instagram.com/"
               target="_blank"
               rel="noreferrer"
-              className="mt-2 inline-flex items-center gap-2 text-xs text-neutral-700 hover:text-neutral-900 sm:mt-3 sm:text-sm"
+              className="mt-1 inline-flex items-center gap-1 text-xs text-neutral-700 hover:text-neutral-900 sm:mt-2 sm:gap-2 sm:text-sm"
             >
-              <Instagram size={16} /> @groom_ig
+              <Instagram size={14} className="sm:w-4 sm:h-4" /> @groom_ig
             </a>
           </motion.div>
         </div>
       </Section>
 
       {/* SECTION 3 */}
-      <Section bg={bg3} contentClassName="flex flex-col items-center justify-start gap-6 py-16 sm:gap-10 sm:py-20">
-        <motion.div {...rise} className="w-full px-4 sm:px-6">
+      <Section bg={bg3} contentClassName="flex flex-col items-center justify-start gap-4 py-10 sm:gap-6 sm:py-16 md:gap-10 md:py-20">
+        <motion.div {...rise} className="w-full px-2 sm:px-3 md:px-6">
           <Countdown />
         </motion.div>
-        <motion.div {...rise} className="w-full max-w-3xl px-4 sm:px-6">
+        <motion.div {...rise} className="w-full max-w-3xl px-3 sm:px-4 md:px-6">
           <img src={isi3Asset.url} alt="Section 3" className="w-full" />
         </motion.div>
       </Section>
@@ -301,24 +311,26 @@ function Invitation() {
       <motion.img {...rise} src={bg4} alt="" className="block h-auto w-full select-none" draggable={false} />
 
       {/* SECTION 5 — gallery */}
-      <Section bg={bg5} contentClassName="flex flex-col items-center justify-center gap-6 py-16 sm:gap-8 sm:py-20">
-        <motion.h2 {...rise} className="font-serif text-2xl text-neutral-800 px-4 sm:text-3xl md:text-4xl">
+      <Section bg={bg5} contentClassName="flex flex-col items-center justify-center gap-4 py-10 sm:gap-6 sm:py-16 md:gap-8 md:py-20">
+        <motion.h2 {...rise} className="font-serif text-lg text-neutral-800 px-3 sm:text-2xl md:text-3xl lg:text-4xl">
           Wedding Gallery
         </motion.h2>
-        <Gallery />
+        <div className="w-full">
+          <Gallery />
+        </div>
       </Section>
 
       {/* SECTION 6 */}
       <motion.img {...rise} src={bg6} alt="" className="block h-auto w-full select-none" draggable={false} />
 
       {/* SECTION 7 — RSVP Canva */}
-      <Section bg={bg7} contentClassName="flex flex-col items-center justify-center gap-4 py-16 sm:gap-6 sm:py-20">
-        <motion.h2 {...rise} className="font-serif text-2xl text-neutral-800 px-4 sm:text-3xl md:text-4xl">
+      <Section bg={bg7} contentClassName="flex flex-col items-center justify-center gap-3 py-10 sm:gap-4 sm:py-16 md:gap-6 md:py-20">
+        <motion.h2 {...rise} className="font-serif text-lg text-neutral-800 px-3 sm:text-2xl md:text-3xl lg:text-4xl">
           RSVP
         </motion.h2>
         <motion.div
           {...rise}
-          className="w-full max-w-3xl overflow-hidden rounded-lg px-3 shadow-lg sm:rounded-xl sm:px-4 sm:shadow-2xl"
+          className="w-full max-w-3xl overflow-hidden rounded-lg px-2 shadow-lg sm:rounded-xl sm:px-3 sm:shadow-2xl md:px-4"
         >
           <div
             style={{
@@ -348,9 +360,9 @@ function Invitation() {
       </Section>
 
       {/* SECTION 8 */}
-      <Section bg={bg8} contentClassName="flex flex-col items-center justify-start py-16 sm:py-20">
-        <motion.div {...rise} className="w-full max-w-2xl px-4 sm:px-6">
-          <div className="max-h-[70vh] overflow-y-auto rounded-lg bg-white/40 p-3 backdrop-blur sm:rounded-xl sm:p-4">
+      <Section bg={bg8} contentClassName="flex flex-col items-center justify-start py-10 sm:py-16 md:py-20">
+        <motion.div {...rise} className="w-full max-w-2xl px-3 sm:px-4 md:px-6">
+          <div className="max-h-[60vh] overflow-y-auto rounded-lg bg-white/50 p-2 backdrop-blur sm:max-h-[70vh] sm:p-3 md:p-4">
             <img src={isi8} alt="Section 8" className="w-full" />
           </div>
         </motion.div>
