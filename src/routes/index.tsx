@@ -1,5 +1,5 @@
 import { createFileRoute, useNavigate } from "@tanstack/react-router";
-import { useState } from "react";
+import { useEffect } from "react";
 import { z } from "zod";
 import { motion } from "framer-motion";
 import coverImg from "@/assets/wedding/cover.png";
@@ -24,55 +24,71 @@ export const Route = createFileRoute("/")({
 function Cover() {
   const { to } = Route.useSearch();
   const navigate = useNavigate();
-  const [guest, setGuest] = useState(to ?? "");
+  const guestName = to || "Tamu Undangan";
 
-  const open = () => {
-    navigate({ to: "/invitation", search: { to: guest || "Tamu Undangan" } });
-  };
+  // Auto navigate ke invitation setelah 2 detik
+  useEffect(() => {
+    const timer = setTimeout(() => {
+      navigate({ to: "/invitation", search: { to: guestName } });
+    }, 2500);
+    return () => clearTimeout(timer);
+  }, [guestName, navigate]);
 
-  const handleKeyPress = (e: React.KeyboardEvent) => {
-    if (e.key === "Enter") {
-      open();
-    }
+  const handleClick = () => {
+    navigate({ to: "/invitation", search: { to: guestName } });
   };
 
   return (
     <div
-      className="relative flex min-h-screen w-full items-end justify-center bg-cover bg-center bg-no-repeat"
+      className="relative flex min-h-screen w-full items-center justify-center bg-cover bg-center bg-no-repeat"
       style={{ backgroundImage: `url(${coverImg})` }}
+      onClick={handleClick}
+      role="button"
+      tabIndex={0}
+      onKeyDown={(e) => {
+        if (e.key === "Enter" || e.key === " ") {
+          handleClick();
+        }
+      }}
     >
+      {/* Overlay untuk memastikan text readable */}
+      <div className="absolute inset-0 bg-black/10"></div>
+
+      {/* Content */}
       <motion.div
-        className="mb-8 flex w-full max-w-sm flex-col items-center gap-4 px-4 text-center sm:mb-12 sm:px-6"
-        initial={{ opacity: 0, y: 40 }}
+        className="relative z-10 flex w-full flex-col items-center justify-center px-4 text-center sm:px-6"
+        initial={{ opacity: 0, y: 30 }}
         animate={{ opacity: 1, y: 0 }}
-        transition={{ duration: 0.8, delay: 0.2 }}
+        transition={{ duration: 0.8 }}
       >
-        <p className="text-xs uppercase tracking-[0.3em] text-white/90 drop-shadow sm:text-sm">
-          Kepada Yth.
-        </p>
-        {guest && (
-          <motion.p
-            className="text-sm font-semibold tracking-wide text-white drop-shadow sm:text-base"
-            initial={{ opacity: 0, scale: 0.8 }}
-            animate={{ opacity: 1, scale: 1 }}
-            transition={{ duration: 0.6 }}
-          >
-            {guest}
-          </motion.p>
-        )}
-        <input
-          value={guest}
-          onChange={(e) => setGuest(e.target.value)}
-          onKeyPress={handleKeyPress}
-          placeholder="Nama Tamu"
-          className="w-full rounded-full border border-white/40 bg-white/20 px-4 py-2 text-center text-xs text-white placeholder:text-white/70 backdrop-blur focus:outline-none focus:ring-2 focus:ring-white/50 sm:px-5 sm:py-3 sm:text-sm"
-        />
-        <button
-          onClick={open}
-          className="mt-2 rounded-full bg-white/90 px-6 py-2 text-xs font-medium uppercase tracking-widest text-neutral-900 shadow-lg transition hover:scale-105 hover:bg-white active:scale-95 sm:mt-4 sm:px-8 sm:py-3 sm:text-sm"
+        {/* "Kepada Yth." */}
+        <motion.p
+          className="text-sm font-light uppercase tracking-[0.2em] text-white drop-shadow-lg sm:text-base md:text-lg"
+          initial={{ opacity: 0 }}
+          animate={{ opacity: 1 }}
+          transition={{ duration: 0.6, delay: 0.2 }}
         >
-          Buka Undangan
-        </button>
+          Kepada Yth.
+        </motion.p>
+
+        {/* Nama Tamu */}
+        <motion.p
+          className="mt-4 text-2xl font-semibold tracking-wide text-white drop-shadow-lg sm:mt-6 sm:text-3xl md:mt-8 md:text-4xl"
+          initial={{ opacity: 0, scale: 0.8 }}
+          animate={{ opacity: 1, scale: 1 }}
+          transition={{ duration: 0.7, delay: 0.4 }}
+        >
+          {guestName}
+        </motion.p>
+
+        {/* Click to continue */}
+        <motion.p
+          className="mt-12 text-xs text-white/70 drop-shadow-lg sm:mt-16 sm:text-sm"
+          animate={{ opacity: [0.5, 1, 0.5] }}
+          transition={{ duration: 2, repeat: Infinity }}
+        >
+          Klik untuk melanjutkan
+        </motion.p>
       </motion.div>
     </div>
   );
