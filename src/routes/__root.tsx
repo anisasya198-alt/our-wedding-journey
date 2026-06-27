@@ -77,14 +77,18 @@ export const Route = createRootRouteWithContext<{ queryClient: QueryClient }>()(
     meta: [
       { charSet: "utf-8" },
       { name: "viewport", content: "width=device-width, initial-scale=1" },
-      { title: "Lovable App" },
-      { name: "description", content: "Lovable Generated Project" },
+      { title: "The Wedding of Adam & Kayzha" },
+      { name: "description", content: "Kami mengundang Bapak/Ibu/Saudara?i untuk hadir di hari bagahagia kami." },
       { name: "author", content: "Lovable" },
-      { property: "og:title", content: "Lovable App" },
-      { property: "og:description", content: "Lovable Generated Project" },
+      { property: "og:title", content: "The Wedding of Adam & Kayzha" },
+      { property: "og:description", content: "Kami mengundang Bapak/Ibu/Saudara?i untuk hadir di hari bagahagia kami." },
       { property: "og:type", content: "website" },
       { name: "twitter:card", content: "summary" },
       { name: "twitter:site", content: "@Lovable" },
+      { name: "twitter:title", content: "The Wedding of Adam & Kayzha" },
+      { name: "twitter:description", content: "Kami mengundang Bapak/Ibu/Saudara?i untuk hadir di hari bagahagia kami." },
+      { property: "og:image", content: "https://storage.googleapis.com/gpt-engineer-file-uploads/attachments/og-images/34d36a7a-d777-43c3-9aea-8bc46b88161c" },
+      { name: "twitter:image", content: "https://storage.googleapis.com/gpt-engineer-file-uploads/attachments/og-images/34d36a7a-d777-43c3-9aea-8bc46b88161c" },
     ],
     links: [
       {
