@@ -142,3 +142,15 @@
     color: var(--color-foreground);
   }
 }
+
+/* Smooth scrolling */
+html {
+  scroll-behavior: smooth;
+}
+
+/* Mobile-friendly improvements */
+@media (max-width: 640px) {
+  body {
+    font-size: 14px;
+  }
+}
